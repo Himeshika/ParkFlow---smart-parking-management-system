@@ -1,0 +1,15 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /user_service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true

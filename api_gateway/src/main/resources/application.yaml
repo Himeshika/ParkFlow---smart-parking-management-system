@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: api_gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: parking_service
+              uri: lb://parking-service
+              predicates:
+                - Path=/parking_service/**
+
+            - id: user_service
+              uri: lb://user-service
+              predicates:
+                - Path=/user_service/**
+
+            - id: payment_service
+              uri: lb://payment-service
+              predicates:
+                - Path=/payment_service/**
+
+            - id: vehicle_service
+              uri: lb://vehicle-service
+              predicates:
+                - Path=/api/v1/vehicles/**
+
+server:
+  port: 8080
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    reactor.netty: DEBUG
+    org.springframework.web.reactive: DEBUG
